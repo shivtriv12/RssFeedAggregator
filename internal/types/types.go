@@ -4,10 +4,12 @@ import (
 	"errors"
 
 	"github.com/shivtriv12/BlogAggregator/internal/config"
+	"github.com/shivtriv12/BlogAggregator/internal/database"
 )
 
 type State struct {
 	ConfigState *config.Config `json:"configState"`
+	Db          *database.Queries
 }
 
 type Command struct {
