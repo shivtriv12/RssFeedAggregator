@@ -41,6 +41,7 @@ func main() {
 	mapCommands.Register("reset", commands.ResetHandler)
 	mapCommands.Register("users", commands.UsersHandler)
 	mapCommands.Register("agg", commands.AggHandler)
+	mapCommands.Register("addfeed", commands.AddFeedHandler)
 	// user commands
 	cmd := os.Args[1:]
 	if len(cmd) < 1 {
