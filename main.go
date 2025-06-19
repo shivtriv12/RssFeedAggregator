@@ -45,6 +45,7 @@ func main() {
 	mapCommands.Register("feeds", commands.FeedsHandler)
 	mapCommands.Register("follow", commands.MiddlewareLoggedIn(commands.FollowHandler))
 	mapCommands.Register("following", commands.MiddlewareLoggedIn(commands.FollowingHandler))
+	mapCommands.Register("unfollow", commands.MiddlewareLoggedIn(commands.UnfollowHandler))
 	// user commands
 	cmd := os.Args[1:]
 	if len(cmd) < 1 {
