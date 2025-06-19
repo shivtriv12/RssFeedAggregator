@@ -38,5 +38,19 @@ func AddFeedHandler(s *types.State, cmd types.Command) error {
 	fmt.Printf("URL: %s\n", feed.Url)
 	fmt.Printf("Owner: %s (ID: %s)\n", s.ConfigState.Current_User_Name, feed.UserID)
 	fmt.Printf("Created at: %s\n", feed.CreatedAt)
+
+	feedFollowParams := database.CreateFeedFollowParams{
+		ID:        uuid.New(),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		UserID:    user.ID,
+		FeedID:    feed.ID,
+	}
+	feedFollow, err := s.Db.CreateFeedFollow(ctx, feedFollowParams)
+	if err != nil {
+		return fmt.Errorf("feed created but failed to follow it: %w", err)
+	}
+	fmt.Printf("\nAutomatically followed feed: %s\n", feedFollow.FeedName)
+
 	return nil
 }

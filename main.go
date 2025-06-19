@@ -43,6 +43,8 @@ func main() {
 	mapCommands.Register("agg", commands.AggHandler)
 	mapCommands.Register("addfeed", commands.AddFeedHandler)
 	mapCommands.Register("feeds", commands.FeedsHandler)
+	mapCommands.Register("follow", commands.FollowHandler)
+	mapCommands.Register("following", commands.FollowingHandler)
 	// user commands
 	cmd := os.Args[1:]
 	if len(cmd) < 1 {

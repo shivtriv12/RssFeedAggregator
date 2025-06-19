@@ -101,3 +101,21 @@ func (q *Queries) GetAllFeeds(ctx context.Context) ([]GetAllFeedsRow, error) {
 	}
 	return items, nil
 }
+
+const getFeedByUrl = `-- name: GetFeedByUrl :one
+SELECT feeds.id,feeds.name
+FROM feeds
+WHERE url = $1
+`
+
+type GetFeedByUrlRow struct {
+	ID   uuid.UUID
+	Name string
+}
+
+func (q *Queries) GetFeedByUrl(ctx context.Context, url string) (GetFeedByUrlRow, error) {
+	row := q.db.QueryRowContext(ctx, getFeedByUrl, url)
+	var i GetFeedByUrlRow
+	err := row.Scan(&i.ID, &i.Name)
+	return i, err
+}
