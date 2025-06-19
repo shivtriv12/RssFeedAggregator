@@ -41,10 +41,10 @@ func main() {
 	mapCommands.Register("reset", commands.ResetHandler)
 	mapCommands.Register("users", commands.UsersHandler)
 	mapCommands.Register("agg", commands.AggHandler)
-	mapCommands.Register("addfeed", commands.AddFeedHandler)
+	mapCommands.Register("addfeed", commands.MiddlewareLoggedIn(commands.AddFeedHandler))
 	mapCommands.Register("feeds", commands.FeedsHandler)
-	mapCommands.Register("follow", commands.FollowHandler)
-	mapCommands.Register("following", commands.FollowingHandler)
+	mapCommands.Register("follow", commands.MiddlewareLoggedIn(commands.FollowHandler))
+	mapCommands.Register("following", commands.MiddlewareLoggedIn(commands.FollowingHandler))
 	// user commands
 	cmd := os.Args[1:]
 	if len(cmd) < 1 {

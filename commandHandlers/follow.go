@@ -11,15 +11,11 @@ import (
 	"github.com/shivtriv12/BlogAggregator/internal/types"
 )
 
-func FollowHandler(s *types.State, cmd types.Command) error {
+func FollowHandler(s *types.State, cmd types.Command, user database.User) error {
 	if len(cmd.Args) != 1 {
 		return fmt.Errorf("follow requires exactly 1 argument: feed URL")
 	}
 	ctx := context.Background()
-	user, err := s.Db.GetUser(ctx, s.ConfigState.Current_User_Name)
-	if err != nil {
-		return fmt.Errorf("error in getting current user %w", err)
-	}
 	feed, err := s.Db.GetFeedByUrl(ctx, cmd.Args[0])
 	if err != nil {
 		return fmt.Errorf("feed not found with URL %s - please add it first using 'addfeed'", cmd.Args[0])
