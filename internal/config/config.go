@@ -19,13 +19,13 @@ func Read() (*Config, error) {
 	}
 	fileContent, err := os.ReadFile(homeDirectoryPath + "/.gatorconfig.json")
 	if err != nil {
-		fmt.Println("Unable to read file")
+		fmt.Println("Unable to read gatorconfig")
 		return nil, err
 	}
 	config := &Config{}
 	err = json.Unmarshal(fileContent, config)
 	if err != nil {
-		fmt.Println("Unable to unmarshal")
+		fmt.Println("Unable to unmarshal gatorconfig")
 		return nil, err
 	}
 	return config, nil
@@ -39,12 +39,12 @@ func SetUser(C *Config) error {
 	}
 	newConfig, err := json.Marshal(*C)
 	if err != nil {
-		fmt.Println("Error in marshaling Config")
+		fmt.Println("Error in marshaling gatorconfig")
 		return err
 	}
 	err1 := os.WriteFile(homeDirectoryPath+"/.gatorconfig.json", newConfig, 0644)
 	if err1 != nil {
-		fmt.Println("Error in writing file")
+		fmt.Println("Error in writing gatorconfig")
 		return err1
 	}
 	return nil

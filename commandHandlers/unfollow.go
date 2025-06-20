@@ -9,6 +9,10 @@ import (
 )
 
 func UnfollowHandler(s *types.State, cmd types.Command, user database.User) error {
+	if len(cmd.Args) != 1 {
+		return fmt.Errorf("unfollow requires exactly 1 argument: feed URL")
+	}
+
 	params := database.DeleteFeedFollowParams{
 		UserID: user.ID,
 		Url:    cmd.Args[0],

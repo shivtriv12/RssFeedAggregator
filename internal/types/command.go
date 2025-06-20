@@ -8,13 +8,13 @@ import (
 )
 
 type State struct {
-	ConfigState *config.Config `json:"configState"`
+	ConfigState *config.Config
 	Db          *database.Queries
 }
 
 type Command struct {
-	Name string   `json:"name"`
-	Args []string `json:"args"`
+	Name string
+	Args []string
 }
 
 type Commands struct {

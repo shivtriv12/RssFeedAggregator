@@ -12,9 +12,9 @@ func ResetHandler(s *types.State, cmd types.Command) error {
 	ctx := context.Background()
 	err := s.Db.ResetUserTable(ctx)
 	if err != nil {
-		fmt.Println("Error in deleting everything from users table")
+		fmt.Println("Error in resetting")
 		os.Exit(1)
 	}
-	fmt.Println("Deleted all rows from users table")
+	fmt.Println("DB resetted")
 	return nil
 }

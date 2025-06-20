@@ -14,7 +14,7 @@ import (
 )
 
 func RegisterHandler(s *types.State, cmd types.Command) error {
-	if len(cmd.Args) == 0 {
+	if len(cmd.Args) != 1 {
 		return errors.New("the login handler expects a single argument, the username")
 	}
 	ctx := context.Background()
@@ -32,7 +32,7 @@ func RegisterHandler(s *types.State, cmd types.Command) error {
 	s.ConfigState.Current_User_Name = cmd.Args[0]
 	err = config.SetUser(s.ConfigState)
 	if err != nil {
-		fmt.Println("Error saving config:", err)
+		fmt.Println("Error saving gatorconfig:", err)
 		os.Exit(1)
 	}
 	fmt.Println("user was created", user.Name)
