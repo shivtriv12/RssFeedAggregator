@@ -46,6 +46,7 @@ func main() {
 	mapCommands.Register("follow", commands.MiddlewareLoggedIn(commands.FollowHandler))
 	mapCommands.Register("following", commands.MiddlewareLoggedIn(commands.FollowingHandler))
 	mapCommands.Register("unfollow", commands.MiddlewareLoggedIn(commands.UnfollowHandler))
+	mapCommands.Register("browse", commands.MiddlewareLoggedIn(commands.BrowseHandler))
 	// user commands
 	cmd := os.Args[1:]
 	if len(cmd) < 1 {
