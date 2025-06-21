@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/shivtriv12/BlogAggregator/internal/types"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/types"
 )
 
 func FeedsHandler(s *types.State, cmd types.Command) error {

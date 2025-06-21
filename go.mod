@@ -1,4 +1,4 @@
-module github.com/shivtriv12/BlogAggregator
+module github.com/shivtriv12/RSSFeedAggregator
 
 go 1.22.0
 

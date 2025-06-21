@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/shivtriv12/BlogAggregator/internal/rss"
-	"github.com/shivtriv12/BlogAggregator/internal/types"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/rss"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/types"
 )
 
 func AggHandler(s *types.State, cmd types.Command) error {

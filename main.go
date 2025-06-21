@@ -7,10 +7,10 @@ import (
 
 	_ "github.com/lib/pq"
 
-	commands "github.com/shivtriv12/BlogAggregator/commandHandlers"
-	"github.com/shivtriv12/BlogAggregator/internal/config"
-	"github.com/shivtriv12/BlogAggregator/internal/database"
-	"github.com/shivtriv12/BlogAggregator/internal/types"
+	commands "github.com/shivtriv12/RSSFeedAggregator/commandHandlers"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/config"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/database"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/types"
 )
 
 func main() {

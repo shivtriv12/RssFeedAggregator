@@ -3,8 +3,8 @@ package types
 import (
 	"errors"
 
-	"github.com/shivtriv12/BlogAggregator/internal/config"
-	"github.com/shivtriv12/BlogAggregator/internal/database"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/config"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/database"
 )
 
 type State struct {

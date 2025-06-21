@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shivtriv12/BlogAggregator/internal/config"
-	"github.com/shivtriv12/BlogAggregator/internal/database"
-	"github.com/shivtriv12/BlogAggregator/internal/types"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/config"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/database"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/types"
 )
 
 func RegisterHandler(s *types.State, cmd types.Command) error {

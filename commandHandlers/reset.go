@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/shivtriv12/BlogAggregator/internal/types"
+	"github.com/shivtriv12/RSSFeedAggregator/internal/types"
 )
 
 func ResetHandler(s *types.State, cmd types.Command) error {
