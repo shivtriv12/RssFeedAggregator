@@ -25,6 +25,6 @@ func LoginHandler(s *types.State, cmd types.Command) error {
 		fmt.Println("Error updating config:", err)
 		os.Exit(1)
 	}
-	fmt.Println(user.Name)
+	fmt.Println("logged in for " + user.Name)
 	return nil
 }

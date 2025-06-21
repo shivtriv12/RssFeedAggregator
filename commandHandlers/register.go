@@ -15,7 +15,7 @@ import (
 
 func RegisterHandler(s *types.State, cmd types.Command) error {
 	if len(cmd.Args) != 1 {
-		return errors.New("the login handler expects a single argument, the username")
+		return errors.New("the register handler expects a single argument, the username")
 	}
 	ctx := context.Background()
 	params := database.CreateUserParams{

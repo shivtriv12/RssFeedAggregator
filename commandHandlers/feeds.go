@@ -13,7 +13,8 @@ func FeedsHandler(s *types.State, cmd types.Command) error {
 	if err != nil {
 		return fmt.Errorf("error getting stored feeds %w", err)
 	}
-	for _, feed := range feeds {
+	for i, feed := range feeds {
+		fmt.Println(i + 1)
 		fmt.Println(feed.Name)
 		fmt.Println(feed.Url)
 		fmt.Println(feed.UserName)

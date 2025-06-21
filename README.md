@@ -65,37 +65,37 @@ Here are some commands to get you started:
 
 ```bash
 # Register a new user
-gator register username
+go run . register username
 
 # Log in as an existing user
-gator login username
+go run . login username
 ```
 
 ### Feed Management
 
 ```bash
 # Add a new RSS feed
-gator addfeed "Tech News" "https://example.com/feed.xml"
+go run . addfeed "Tech News" "https://example.com/feed.xml"
 
 # List feeds you're following
-gator following
+go run . following
 ```
 
 ### Reading Content
 
 ```bash
 # Browse the latest posts (default: shows 2 posts)
-gator browse
+go run . browse
 
 # Browse more posts
-gator browse 10
+go run . browse 10
 ```
 
 ### Automatic Feed Collection
 
 ```bash
 # Start collecting feeds every minute
-gator agg 1m
+go run . agg 1m
 ```
 
 ## Command Reference
