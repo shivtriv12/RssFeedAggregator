@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -26,14 +25,12 @@ func RegisterHandler(s *types.State, cmd types.Command) error {
 	}
 	user, err := s.Db.CreateUser(ctx, params)
 	if err != nil {
-		fmt.Println("Error creating user:", err)
-		os.Exit(1)
+		return fmt.Errorf("Error creating user: %w", err)
 	}
 	s.ConfigState.Current_User_Name = cmd.Args[0]
 	err = config.SetUser(s.ConfigState)
 	if err != nil {
-		fmt.Println("Error saving gatorconfig:", err)
-		os.Exit(1)
+		return fmt.Errorf("Error saving gatorconfig: %w", err)
 	}
 	fmt.Println("user was created", user.Name)
 	return nil

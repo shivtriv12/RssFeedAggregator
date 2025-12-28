@@ -14,7 +14,7 @@ func AggHandler(s *types.State, cmd types.Command) error {
 	}
 	timeBetweenRequests, err := time.ParseDuration(cmd.Args[0])
 	if err != nil {
-		fmt.Println("unable to parse time passed")
+		return fmt.Errorf("unable to parse time passed %w", err)
 	}
 	ticker := time.NewTicker(timeBetweenRequests)
 	fmt.Printf("Collecting feeds every %s\n", timeBetweenRequests)

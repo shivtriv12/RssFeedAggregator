@@ -2,9 +2,10 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
+	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 
 	commands "github.com/shivtriv12/RSSFeedAggregator/commandHandlers"
@@ -14,51 +15,55 @@ import (
 )
 
 func main() {
-	//db setup
-	db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/gator")
+	err := godotenv.Load()
 	if err != nil {
-		fmt.Println("Error connecting to database:", err)
-		os.Exit(1)
+		log.Fatal("Error loading .env: ", err)
+	}
+
+	dbUrl := os.Getenv("DB_URL")
+	if dbUrl == "" {
+		log.Fatal("DB_URL not set: ", err)
+	}
+	db, err := sql.Open("postgres", dbUrl)
+	if err != nil {
+		log.Fatal("Error connecting to database: ", err)
 	}
 	defer db.Close()
 	dbQueries := database.New(db)
-	// getting current config
+
 	currentConfig, err := config.Read()
 	if err != nil {
-		fmt.Println("Error Reading gaterConfig")
+		log.Fatal("Error Reading gaterConfig: ", err)
 	}
-	//setting current config and db in state
 	appState := types.State{
 		Db:          dbQueries,
 		ConfigState: currentConfig,
 	}
-	// commands registerations
+
 	mapCommands := types.Commands{
 		CommandsMap: make(map[string]func(s *types.State, cmd types.Command) error),
 	}
-	mapCommands.Register("login", commands.LoginHandler)
 	mapCommands.Register("register", commands.RegisterHandler)
-	mapCommands.Register("reset", commands.ResetHandler)
+	mapCommands.Register("login", commands.LoginHandler)
 	mapCommands.Register("users", commands.UsersHandler)
-	mapCommands.Register("agg", commands.AggHandler)
+	mapCommands.Register("reset", commands.ResetHandler)
 	mapCommands.Register("addfeed", commands.MiddlewareLoggedIn(commands.AddFeedHandler))
 	mapCommands.Register("feeds", commands.FeedsHandler)
 	mapCommands.Register("follow", commands.MiddlewareLoggedIn(commands.FollowHandler))
 	mapCommands.Register("following", commands.MiddlewareLoggedIn(commands.FollowingHandler))
 	mapCommands.Register("unfollow", commands.MiddlewareLoggedIn(commands.UnfollowHandler))
+	mapCommands.Register("agg", commands.AggHandler)
 	mapCommands.Register("browse", commands.MiddlewareLoggedIn(commands.BrowseHandler))
-	// user commands
+
 	cmd := os.Args[1:]
 	if len(cmd) < 1 {
-		fmt.Println("not enough commands")
-		os.Exit(1)
+		log.Fatal("Usage: go run . <cmd> <args>")
 	}
 	userCmd := types.Command{
 		Name: cmd[0],
 		Args: cmd[1:],
 	}
 	if err := mapCommands.Run(&appState, userCmd); err != nil {
-		fmt.Println("Error running command:", err)
-		os.Exit(1)
+		log.Fatal("Error running command: ", err)
 	}
 }

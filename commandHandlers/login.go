@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"os"
 
 	"github.com/shivtriv12/RSSFeedAggregator/internal/config"
 	"github.com/shivtriv12/RSSFeedAggregator/internal/types"
@@ -17,13 +16,12 @@ func LoginHandler(s *types.State, cmd types.Command) error {
 	ctx := context.Background()
 	user, err := s.Db.GetUser(ctx, cmd.Args[0])
 	if err != nil {
-		os.Exit(1)
+		return err
 	}
 	s.ConfigState.Current_User_Name = cmd.Args[0]
 	err = config.SetUser(s.ConfigState)
 	if err != nil {
-		fmt.Println("Error updating config:", err)
-		os.Exit(1)
+		return fmt.Errorf("Error updating config: %w", err)
 	}
 	fmt.Println("logged in for " + user.Name)
 	return nil
