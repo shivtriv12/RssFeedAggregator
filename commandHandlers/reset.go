@@ -13,6 +13,10 @@ func ResetHandler(s *types.State, cmd types.Command) error {
 	if err != nil {
 		return err
 	}
+	err = s.Db.ResetFeedsTable(ctx)
+	if err != nil {
+		return err
+	}
 	fmt.Println("DB resetted")
 	return nil
 }

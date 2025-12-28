@@ -24,11 +24,6 @@ func ScrapeFeeds(s *types.State) error {
 		return fmt.Errorf("error fetching feed %s: %w", feed.Url, err)
 	}
 
-	err = s.Db.MarkFeedFetched(context.Background(), feed.ID)
-	if err != nil {
-		return fmt.Errorf("error marking feed as fetched: %w", err)
-	}
-
 	fmt.Printf("Found %d items in feed\n", len(feedContent.Channel.Item))
 
 	for _, item := range feedContent.Channel.Item {
@@ -54,7 +49,14 @@ func ScrapeFeeds(s *types.State) error {
 				continue
 			}
 			fmt.Printf("Error saving post %s: %v\n", item.Title, err)
+		} else {
+			fmt.Printf("saved post: %s\n", item.Title)
 		}
+	}
+
+	err = s.Db.MarkFeedFetched(context.Background(), feed.ID)
+	if err != nil {
+		return fmt.Errorf("error marking feed as fetched: %w", err)
 	}
 
 	return nil

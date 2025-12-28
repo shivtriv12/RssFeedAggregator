@@ -155,3 +155,12 @@ func (q *Queries) MarkFeedFetched(ctx context.Context, id uuid.UUID) error {
 	_, err := q.db.ExecContext(ctx, markFeedFetched, id)
 	return err
 }
+
+const resetFeedsTable = `-- name: ResetFeedsTable :exec
+DELETE FROM feeds
+`
+
+func (q *Queries) ResetFeedsTable(ctx context.Context) error {
+	_, err := q.db.ExecContext(ctx, resetFeedsTable)
+	return err
+}

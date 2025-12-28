@@ -20,6 +20,8 @@ func AggHandler(s *types.State, cmd types.Command) error {
 	fmt.Printf("Collecting feeds every %s\n", timeBetweenRequests)
 	for ; ; <-ticker.C {
 		fmt.Println("fetching next feed")
-		rss.ScrapeFeeds(s)
+		if err := rss.ScrapeFeeds(s); err != nil {
+			fmt.Printf("scrape error: %v\n", err)
+		}
 	}
 }
